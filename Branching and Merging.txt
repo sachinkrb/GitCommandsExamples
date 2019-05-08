@@ -1,0 +1,479 @@
+
+-----------------------------------------------
+BRANCHING AND MERGING
+------------------------------------------------
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop
+$ mkdir gittest2
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop
+$ cd gittest2
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2
+$ git init
+Initialized empty Git repository in C:/Users/sachi/Desktop/gittest2/.git/
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git add s1
+warning: LF will be replaced by CRLF in s1.
+The file will have its original line endings in your working directory
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git commit -m "create s1"
+[master (root-commit) 50626a7] create s1
+ 1 file changed, 2 insertions(+)
+ create mode 100644 s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ vi s2
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git add s2
+warning: LF will be replaced by CRLF in s2.
+The file will have its original line endings in your working directory
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git commit -m "create s2"
+[master d6496f1] create s2
+ 1 file changed, 1 insertion(+)
+ create mode 100644 s2
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git log
+commit d6496f1afa71b39a4da03e327c1f09137f71bfa3 (HEAD -> master)
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 14:56:49 2019 -0500
+
+    create s2
+
+commit 50626a77762d547e789491958a983a586e90e1e5
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 14:55:27 2019 -0500
+
+    create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git log --all --decorate --oneline --graph
+* d6496f1 (HEAD -> master) create s2
+* 50626a7 create s1
+#HEAD IS POINTING TO MASTER BRANCH MEANING THE MASTER BRANCH HAS BEEN CHECKED OUT.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ alias graph="git log --all --decorate --oneline --graph"
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ graph
+* d6496f1 (HEAD -> master) create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git branch SDN
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git branch auth
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git branch
+  SDN
+  auth
+* master
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ graph
+* d6496f1 (HEAD -> master, auth, SDN) create s2
+* 50626a7 create s1
+#HEAD IS STILL POINTING TO MASTER BRANCH.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git status
+On branch SDN
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (SDN)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (SDN)
+$ git add s1 ; git commit -m "SDN for s1"
+warning: LF will be replaced by CRLF in s1.
+The file will have its original line endings in your working directory
+[SDN 9a9e3bf] SDN for s1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (SDN)
+$graph
+* 9a9e3bf (HEAD -> SDN) SDN for s1
+* d6496f1 (master, auth) create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (SDN)
+$ git checkout auth
+Switched to branch 'auth'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ git branch
+  SDN
+* auth
+  master
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ graph
+* 9a9e3bf (SDN) SDN for s1
+* d6496f1 (HEAD -> auth, master) create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ cat s1
+This is the first line in s1.
+
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ git checkout SDN
+Switched to branch 'SDN'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (SDN)
+$ cat s1
+This is the first line in s1.
+This is the first edit for s1.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (SDN)
+$ git checkout auth
+Switched to branch 'auth'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ cat s1
+This is the first line in s1.
+This is the first edit in auth branch
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ git status
+On branch auth
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   s1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ git commit -a -m "auth for S1"
+[auth 993448d] auth for S1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+# -a WILL STAGE AND COMMIT THE FILES IN 1 SHOT.
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ graph
+* 993448d (HEAD -> auth) auth for S1
+| * 9a9e3bf (SDN) SDN for s1
+|/
+* d6496f1 (master) create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$  git status
+On branch auth
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (auth)
+$ git checkout master
+Switched to branch 'master'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git diff master..SDN
+diff --git a/s1 b/s1
+index dbcb00a..f4728ca 100644
+--- a/s1
++++ b/s1
+@@ -1,2 +1,2 @@
+ This is the first line in s1.
+-
++This is the first edit for s1.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git merge SDN
+Updating d6496f1..9a9e3bf
+Fast-forward
+ s1 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ cat s1
+This is the first line in s1.
+This is the first edit for s1.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ graph
+* 993448d (auth) auth for S1
+| * 9a9e3bf (HEAD -> master, SDN) SDN for s1
+|/
+* d6496f1 create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git branch --merged
+  SDN
+* master
+
+#SHOWS THAT THE SDN BRANCH HAS BEEN MEREGED WITH MASTER
+#ITS SAFE TO DELETE THE SDN BRANCH NOW SINCE IT HAS BEEN MERGED WITH MASTER BRANCH
+#AFTER MERGING HEAD POINTED BACK TO MASTER.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git branch -d SDN
+Deleted branch SDN (was 9a9e3bf).
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git branch -d auth
+error: The branch 'auth' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D auth'.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git merge auth
+Auto-merging s1
+CONFLICT (content): Merge conflict in s1
+Automatic merge failed; fix conflicts and then commit the result.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git branch --merged
+* master
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git branch
+  auth
+* master
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git branch -D auth
+Deleted branch auth (was 993448d).
+
+---------------------------------
+|MERGING CONFLICTS|
+---------------------------------
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git checkout -b dev
+Switched to a new branch 'dev'
+M       s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ cat s1
+This is the first line in s1
+This is the first edit for s1.Another line ammended
+This is the first edit in auth branch. Another line amended
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ git add s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ git checkout master
+Switched to branch 'master'
+M       s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ cat s1
+This is the first line in s1
+This is the first edit for s1.Another line ammended
+This is the first edit in auth branch. Another line amended
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git checkout dev
+Switched to branch 'dev'
+M       s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ cat s1
+This is the first line in s1
+This is the first edit for s1.Another line ammended
+This is the first edit in auth branch. Another line amended
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ git diff
+diff --git a/s1 b/s1
+index d25555b..cfe6b11 100644
+--- a/s1
++++ b/s1
+@@ -1,3 +1,3 @@
+ This is the first line in s1
+-This is the first edit for s1.Another line ammended
+-This is the first edit in auth branch. Another line amended
++This(changed in dev file) is the first edit for s1.Another line ammended
++This is the first edit in auth branch. Another line amendeid
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ git commit -a -m "update s1"
+[dev b362bdd] update s1
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ cat s1
+This is the first line in s1
+This(changed in dev file) is the first edit for s1.Another line ammended
+This is the first edit in auth branch. Another line amendeid
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (dev)
+$ git checkout master
+Switched to branch 'master'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ cat s1
+This is the first line in s1.
+This (changes made in MASTER) is the first edit for s1.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git commit -a -m "update s1"
+[master 28a7364] update s1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ graph
+* 28a7364 (HEAD -> master) update s1
+| * b362bdd (dev) update s1
+|/
+* 9a9e3bf SDN for s1
+* d6496f1 create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git merge dev
+Auto-merging s1
+CONFLICT (content): Merge conflict in s1
+Automatic merge failed; fix conflicts and then commit the result.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+        both modified:   s1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git merge --abort
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ graph
+* 28a7364 (HEAD -> master) update s1
+| * b362bdd (dev) update s1
+|/
+* 9a9e3bf SDN for s1
+* d6496f1 create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$git merge dev
+Auto-merging s1
+CONFLICT (content): Merge conflict in s1
+Automatic merge failed; fix conflicts and then commit the result.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+        both modified:   s1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git add s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git status
+On branch master
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+
+        modified:   s1
+
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master|MERGING)
+$ git commit
+[master 49f8150] Merge branch 'dev'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ graph
+*   49f8150 (HEAD -> master) Merge branch 'dev'
+|\
+| * b362bdd (dev) update s1
+* | 28a7364 update s1
+|/
+* 9a9e3bf SDN for s1
+* d6496f1 create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git branch -d dev
+Deleted branch dev (was b362bdd).
+
+--------------------------------------------
+|    DETACHED HEAD STATE        |
+--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
