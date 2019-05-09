@@ -457,6 +457,172 @@ Deleted branch dev (was b362bdd).
 |    DETACHED HEAD STATE        |
 --------------------------------------------
 
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git log
+commit 49f8150b233f79cc9c8bbc6bb087a8f047e0e381 (HEAD -> master)
+Merge: 28a7364 b362bdd
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 16:18:03 2019 -0500
+
+    Merge branch 'dev'
+
+commit 28a73640bc42648363d987a1e1faea5c0c7fdefc
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 16:10:28 2019 -0500
+
+    update s1
+
+commit b362bdd89f32134a296e51d3f21b8c9c34d0cd15
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 16:07:36 2019 -0500
+
+    update s1
+
+commit 9a9e3bf24ab76e86508a035284254250e61df5cc
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 15:13:00 2019 -0500
+
+    SDN for s1
+
+commit d6496f1afa71b39a4da03e327c1f09137f71bfa3
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 14:56:49 2019 -0500
+
+    create s2
+
+commit 50626a77762d547e789491958a983a586e90e1e5
+Author: Sachin R <sirhalostreams@gmail.com>
+Date:   Wed May 8 14:55:27 2019 -0500
+
+    create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git checkout d6496f1afa
+Note: checking out 'd6496f1afa'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at d6496f1 create s2
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 ((d6496f1...))
+$ graph
+*   49f8150 (master) Merge branch 'dev'
+|\
+| * b362bdd update s1
+* | 28a7364 update s1
+|/
+* 9a9e3bf SDN for s1
+* d6496f1 (HEAD) create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 ((d6496f1...))
+$ git branch stage
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 ((d6496f1...))
+$ graph
+*   49f8150 (master) Merge branch 'dev'
+|\
+| * b362bdd update s1
+* | 28a7364 update s1
+|/
+* 9a9e3bf SDN for s1
+* d6496f1 (HEAD, stage) create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 ((d6496f1...))
+$ git checkout stage
+Switched to branch 'stage'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (stage)
+$ graph
+*   49f8150 (master) Merge branch 'dev'
+|\
+| * b362bdd update s1
+* | 28a7364 update s1
+|/
+* 9a9e3bf SDN for s1
+* d6496f1 (HEAD -> stage) create s2
+* 50626a7 create s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (stage)
+$ git status
+On branch stage
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (stage)
+$ git checkout master
+Switched to branch 'master'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   s1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git checkout stage
+error: Your local changes to the following files would be overwritten by checkout:
+        s1
+Please commit your changes or stash them before you switch branches.
+Aborting
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash
+Saved working directory and index state WIP on master: 49f8150 Merge branch 'dev'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ vi s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash
+Saved working directory and index state WIP on master: 49f8150 Merge branch 'dev'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash list
+stash@{0}: WIP on master: 49f8150 Merge branch 'dev'
+stash@{1}: WIP on master: 49f8150 Merge branch 'dev'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
