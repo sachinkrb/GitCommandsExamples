@@ -603,7 +603,85 @@ stash@{0}: WIP on master: 49f8150 Merge branch 'dev'
 stash@{1}: WIP on master: 49f8150 Merge branch 'dev'
 
 sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
-$
+$  git stash list -p
+stash@{0}: WIP on master: 49f8150 Merge branch 'dev'
+
+diff --git a/s1 b/s1
+index d177946..398aed2 100644
+--- a/s1
++++ b/s1
+@@ -2,5 +2,3 @@
+ This is the first line in s1.
+ This (changes made in MASTER) is the first edit for s1.
+ This(changed in dev file) is the first edit for s1.Another line ammended
+-This is the first edit in auth branch. Another line amendeid
+-
+stash@{1}: WIP on master: 49f8150 Merge branch 'dev'
+
+diff --git a/s1 b/s1
+index d177946..9457a27 100644
+--- a/s1
++++ b/s1
+@@ -3,4 +3,5 @@ This is the first line in s1.
+ This (changes made in MASTER) is the first edit for s1.
+ This(changed in dev file) is the first edit for s1.Another line ammended
+ This is the first edit in auth branch. Another line amendeid
++This is for detached head.
+
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash apply
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   s1
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git diff
+diff --git a/s1 b/s1
+index d177946..398aed2 100644
+--- a/s1
++++ b/s1
+@@ -2,5 +2,3 @@
+ This is the first line in s1.
+ This (changes made in MASTER) is the first edit for s1.
+ This(changed in dev file) is the first edit for s1.Another line ammended
+-This is the first edit in auth branch. Another line amendeid
+-
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git commit -a -m "remove auth"
+[master 5906fb1] remove auth
+ 1 file changed, 2 deletions(-)
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash list
+stash@{0}: WIP on master: 49f8150 Merge branch 'dev'
+stash@{1}: WIP on master: 49f8150 Merge branch 'dev'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash apply stash@{1}
+Auto-merging s1
+CONFLICT (content): Merge conflict in s1
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash pop stash@{1}
+s1: needs merge
+The stash entry is kept in case you need it again.
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash list
+stash@{0}: WIP on master: 49f8150 Merge branch 'dev'
+stash@{1}: WIP on master: 49f8150 Merge branch 'dev'
+
+sachi@LAPTOP-SACHIN MINGW64 ~/Desktop/gittest2 (master)
+$ git stash save "added new edit"
+s1: needs merge
+
 
 
 

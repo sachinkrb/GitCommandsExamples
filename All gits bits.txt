@@ -1,5 +1,6 @@
 REFERENCES:
 
+Tutorial from David Mahler: https://www.youtube.com/user/mahler711/featured
 Pro Git by Scott Chacon - https://git-scm.com/book/en/v2
 Visual Git Reference by Mark Lodato - https://marklodato.github.io/visual-git-guide/index-en.html
 
